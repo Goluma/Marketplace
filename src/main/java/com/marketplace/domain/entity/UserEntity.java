@@ -39,6 +39,14 @@ public class UserEntity {
     @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
+    public void setLogin(String login){
+        this.login = login;
+    }
+
+    public UUID getUserUuid(){
+        return userUuid;
+    }
+
     public static class UserEntityBuilder{
         private String login;
         private String password;

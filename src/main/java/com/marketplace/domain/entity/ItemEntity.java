@@ -1,7 +1,6 @@
 package com.marketplace.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -34,6 +33,10 @@ public class ItemEntity {
     @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
+    public void setDescription(String str){
+        description = str;
+    }
+
     private ItemEntity(ItemEntityBuilder itemBuilder){
         price = itemBuilder.price;
         description = itemBuilder.description;
@@ -41,10 +44,6 @@ public class ItemEntity {
 
     public UUID getItemUuid(){
         return itemUuid;
-    }
-
-    public String getDescription(){
-        return description;
     }
 
     public static class ItemEntityBuilder{
