@@ -1,4 +1,4 @@
-package com.marketplace.RepositoryTest;
+package com.marketplace.repositoryTest;
 
 import com.marketplace.TestDataUtil;
 import com.marketplace.domain.entity.UserEntity;
@@ -64,7 +64,7 @@ public class UserRepositoryTest {
     public void testThatItemCanBeUpdated(){
         UserEntity userEntity = TestDataUtil.createUserA();
         underTest.save(userEntity);
-        userEntity.setLogin("UPDATED");
+        userEntity.setEmail("UPDATED");
         underTest.save(userEntity);
 
         Optional<UserEntity> user = underTest.findById(userEntity.getUserUuid());

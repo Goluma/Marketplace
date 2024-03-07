@@ -1,4 +1,4 @@
-package com.marketplace.RepositoryTest;
+package com.marketplace.repositoryTest;
 
 import com.marketplace.TestDataUtil;
 import com.marketplace.domain.entity.ItemEntity;

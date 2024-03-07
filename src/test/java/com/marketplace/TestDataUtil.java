@@ -8,45 +8,43 @@ public final class TestDataUtil {
     private TestDataUtil(){}
 
     public static ItemEntity createItemA(){
-        return new ItemEntity
-                .ItemEntityBuilder()
+        return ItemEntity.builder()
                 .setPrice(2000d)
                 .setDescription("Something interesting")
                 .build();
     }
 
+
     public static ItemEntity createItemB(){
-        return new ItemEntity
-                .ItemEntityBuilder()
+        return ItemEntity.builder()
                 .setPrice(3000d)
                 .setDescription("Something interesting")
                 .build();
     }
 
     public static ItemEntity createItemC(){
-        return new ItemEntity
-                .ItemEntityBuilder()
+        return ItemEntity.builder()
                 .setPrice(3000d)
                 .setDescription("Something interesting")
                 .build();
     }
 
     public static UserEntity createUserA(){
-        return new UserEntity.UserEntityBuilder()
+        return UserEntity.builder()
                 .setLogin("kash")
                 .setPassword("1234567890")
                 .build();
     }
 
     public static UserEntity createUserB(){
-        return new UserEntity.UserEntityBuilder()
+        return UserEntity.builder()
                 .setLogin("evgen")
                 .setPassword("1234567890")
                 .build();
     }
 
     public static UserEntity createUserC(){
-        return new UserEntity.UserEntityBuilder()
+        return UserEntity.builder()
                 .setLogin("yenot")
                 .setPassword("1234567890")
                 .build();

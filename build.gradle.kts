@@ -20,6 +20,9 @@ configurations {
 dependencies {
     implementation("org.projectlombok:lombok:1.18.22")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    //implementation ("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-devtools")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")

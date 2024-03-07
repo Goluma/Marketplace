@@ -19,16 +19,21 @@ public class UserEntity {
     @GeneratedValue
     private UUID userUuid;
 
-    private String login;
+    private String email;
+
+    private String nickName;
 
     private String password;
 
+    public UserEntity(){}
+
     private UserEntity(UserEntityBuilder builder){
-        login = builder.login;
+        email = builder.login;
         password = builder.password;
+        nickName = builder.nickName;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<ItemEntity> listOfUserItems;
 
     @CreatedDate
@@ -39,17 +44,23 @@ public class UserEntity {
     @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
-    public void setLogin(String login){
-        this.login = login;
+    public void setEmail(String email){
+        this.email = email;
     }
 
     public UUID getUserUuid(){
         return userUuid;
     }
 
-    public static class UserEntityBuilder{
+    public static UserEntityBuilder builder(){
+        return new UserEntityBuilder();
+    }
+
+    public static final class UserEntityBuilder{
         private String login;
         private String password;
+
+        private String nickName;
 
         public UserEntityBuilder setLogin(String login){
             this.login = login;
@@ -58,6 +69,10 @@ public class UserEntity {
 
         public UserEntityBuilder setPassword(String password){
             this.password = password;
+            return this;
+        }
+        public UserEntityBuilder setNickName(String nickName){
+            this.nickName = nickName;
             return this;
         }
 
@@ -73,12 +88,12 @@ public class UserEntity {
 
         UserEntity that = (UserEntity) o;
         return userUuid.equals(that.userUuid)
-                && login.equals(that.login)
+                && email.equals(that.email)
                 && password.equals(that.password);
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(userUuid, login, password);
+        return Objects.hash(userUuid, email, password);
     }
 }

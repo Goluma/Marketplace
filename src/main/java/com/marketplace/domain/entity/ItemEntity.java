@@ -1,6 +1,7 @@
 package com.marketplace.domain.entity;
 
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -42,11 +43,17 @@ public class ItemEntity {
         description = itemBuilder.description;
     }
 
+    public ItemEntity(){}
+
+    public static ItemEntityBuilder builder(){
+        return new ItemEntityBuilder();
+    }
+
     public UUID getItemUuid(){
         return itemUuid;
     }
 
-    public static class ItemEntityBuilder{
+    public static final class ItemEntityBuilder{
         private Double price;
         private String description;
 
