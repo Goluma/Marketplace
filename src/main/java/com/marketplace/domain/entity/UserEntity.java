@@ -28,12 +28,13 @@ public class UserEntity {
     public UserEntity(){}
 
     private UserEntity(UserEntityBuilder builder){
-        email = builder.login;
+        email = builder.email;
         password = builder.password;
         nickName = builder.nickName;
     }
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "userUuid")
     private List<ItemEntity> listOfUserItems;
 
     @CreatedDate
@@ -57,13 +58,13 @@ public class UserEntity {
     }
 
     public static final class UserEntityBuilder{
-        private String login;
+        private String email;
         private String password;
 
         private String nickName;
 
         public UserEntityBuilder setLogin(String login){
-            this.login = login;
+            this.email = email;
             return this;
         }
 

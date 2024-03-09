@@ -23,6 +23,8 @@ dependencies {
     //implementation ("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-devtools")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.modelmapper:modelmapper:3.0.0")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
