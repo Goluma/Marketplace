@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Marketplace</title>
+</head>
+<form action="#" th:action = "@{/}" method="GET" enctype="utf8">
+    <body>
+    <div>
+        Web Application. <span th:text="${message}"></span> <br />
+        <a th:href="@{/login}" text="#{label.form.loginLink}">Login</a> <br />
+
+        <a th:href="@{/registration}" text="#{label.form.registrationLink}">Registration</a>
+    </div>
+    </body>
+</form>
+</html>

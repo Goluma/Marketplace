@@ -39,10 +39,10 @@ public class RegistrationController {
 
         if (userService.isAlreadyRegistered(userDto)){
             log.info("User is already registered by email: " + userDto.getEmail());
-            return new ModelAndView("ifEmailExist.html","message", "An account for that email already exists.");
+            return new ModelAndView("ifEmailExists.html",
+                    "message",
+                    "An account for " + userDto.getEmail() + " already exists.");
         }
-
-        //todo доделать маппер для класса UserEntity
 
         UserDto savedUserDto =  userService.registerUser(userDto);
         return new ModelAndView("successRegistration.html", "user", savedUserDto);

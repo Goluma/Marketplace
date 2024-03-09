@@ -1,6 +1,8 @@
 package com.marketplace.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,6 +12,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+@Getter
+@Setter
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "marketplace_user")
@@ -45,13 +49,8 @@ public class UserEntity {
     @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
-    public void setEmail(String email){
-        this.email = email;
-    }
-
-    public UUID getUserUuid(){
-        return userUuid;
-    }
+    @Column(name = "DELETED_AT")
+    private LocalDateTime deletedAt;
 
     public static UserEntityBuilder builder(){
         return new UserEntityBuilder();
@@ -90,11 +89,12 @@ public class UserEntity {
         UserEntity that = (UserEntity) o;
         return userUuid.equals(that.userUuid)
                 && email.equals(that.email)
-                && password.equals(that.password);
+                && password.equals(that.password)
+                && nickName.equals(that.nickName);
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(userUuid, email, password);
+        return Objects.hash(userUuid, email, password, nickName);
     }
 }

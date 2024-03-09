@@ -1,6 +1,6 @@
 package com.marketplace.domain.dto;
 
-import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,6 @@ import java.util.UUID;
 @Setter
 public class UserDto {
 
-    @GeneratedValue
     private UUID userUuid;
 
     @NotEmpty
