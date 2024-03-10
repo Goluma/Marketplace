@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Marketplace</title>
+</head>
+<form action="#" th:action = "@{/main}" method="GET" enctype="utf8">
+    <body>
+    <div>
+        Web Application. <span th:text="${message}"></span> <br />
+    </div>
+    </body>
+</form>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</html>

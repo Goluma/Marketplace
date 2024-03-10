@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Marketplace</title>
+</head>
+<form action="#" th:action = "@{/home}" method="GET" enctype="utf8">
+    <body>
+    <div>
+        Web Application. <span th:text="${message}"></span> <br />
+        <a th:href="@{/login}" text="#{label.form.loginLink}">Login</a> <br />
+
+        <a th:href="@{/registration}" text="#{label.form.registrationLink}">Registration</a> <br />
+
+        <a th:href="@{/main}" text="#{label.form.mainLink}"> Main </a>
+    </div>
+    </body>
+</form>
+
+<!--<form th:action="@{/logout}" method="post">-->
+<!--    <input type="submit" value="Sign Out"/>-->
+<!--</form>-->
+</html>

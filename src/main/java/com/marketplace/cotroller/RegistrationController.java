@@ -25,7 +25,7 @@ public class RegistrationController {
     }
 
     @GetMapping()
-    public String showRegistrationForm(Model model){
+    public String showRegistrationPage(Model model){
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "registration";
@@ -33,18 +33,24 @@ public class RegistrationController {
 
     @PostMapping()
     public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto userDto, BindingResult bindingResult){
+
         if (bindingResult.hasErrors()){
             return new ModelAndView("registration");
         }
 
         if (userService.isAlreadyRegistered(userDto)){
             log.info("User is already registered by email: " + userDto.getEmail());
-            return new ModelAndView("ifEmailExists.html",
+            return new ModelAndView("home",
                     "message",
                     "An account for " + userDto.getEmail() + " already exists.");
         }
 
         UserDto savedUserDto =  userService.registerUser(userDto);
-        return new ModelAndView("successRegistration.html", "user", savedUserDto);
+        return new ModelAndView("successRegistration", "user", savedUserDto);
+    }
+
+    @GetMapping(path = "successRegistration")
+    public String showSuccessRegistrationPage(){
+        return "successRegistration";
     }
 }

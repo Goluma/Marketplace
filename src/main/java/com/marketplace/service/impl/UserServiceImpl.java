@@ -7,6 +7,7 @@ import com.marketplace.repository.UserRepository;
 import com.marketplace.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.extern.java.Log;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,11 +19,14 @@ public class UserServiceImpl implements UserService {
 
     public final UserRepository userRepository;
 
+    //public final PasswordEncoder passwordEncoder;
+
     public final UserMapper userMapper;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper){
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper/*, PasswordEncoder passwordEncoder*/){
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        //this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -34,6 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto registerUser(UserDto userDto) {
         UserEntity userEntity = userMapper.userDtoToUserEntity(userDto);
+        //userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         UserEntity savedUserEntity = userRepository.save(userEntity);
         log.info("Saved new user");
         return userMapper.userEntityToUserDto(savedUserEntity);

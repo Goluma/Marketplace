@@ -20,7 +20,7 @@ configurations {
 dependencies {
     implementation("org.projectlombok:lombok:1.18.22")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    //implementation ("org.springframework.boot:spring-boot-starter-security")
+    implementation ("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-devtools")
     implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -30,6 +30,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly ("org.postgresql:postgresql")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testImplementation ("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("com.h2database:h2")

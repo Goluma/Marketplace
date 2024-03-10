@@ -6,22 +6,16 @@
     <div>
         <label text="#{label.user.nickName}">NickName</label>
         <input th:field="*{nickName}"/>
-<!--        <p th:each="error : ${#fields.errors('nickName')}"-->
-<!--           text="${error}">Validation error</p>-->
         <p th:if="${#fields.hasErrors('nickName')}" th:class="${#fields.hasErrors('nickName')}? error"> Nickname can't be null </p>
     </div>
     <div>
         <label text="#{label.user.email}">Email</label>
         <input type="email" th:field="*{email}"/>
-<!--        <p th:each="error : ${#fields.errors('email')}"-->
-<!--           text="${error}">Validation error</p>-->
         <p th:if="${#fields.hasErrors('email')}" th:class="${#fields.hasErrors('email')}? error"> Email can't be null </p>
     </div>
     <div>
         <label text="#{label.user.password}">Password</label>
         <input type="password" th:field="*{password}"/>
-<!--        <p th:each="error : ${#fields.errors('password')}"-->
-<!--           text="${error}">Validation error</p>-->
         <p th:if="${#fields.hasErrors('password')}" th:class="${#fields.hasErrors('password')}? error"> Password can't be null </p>
     </div>
     <style>
@@ -32,6 +26,7 @@
     <button type="submit" text="#{label.form.submit}">Submit</button>
 </form>
 
-<a th:href="@{/login.html}" text="#{label.form.loginLink}">Login</a>
+<a th:href="@{/login}" text="#{label.form.loginLink}">Login</a>
+<a th:href="@{/home}" text="#{label.form.homeLink}"> Home </a>
 </body>
 </html>

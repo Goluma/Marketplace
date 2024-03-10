@@ -1,6 +1,5 @@
 package com.marketplace.domain.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,4 +20,6 @@ public class UserDto {
 
     @NotEmpty
     private String password;
+
+    private String role;
 }

@@ -29,6 +29,8 @@ public class UserEntity {
 
     private String password;
 
+    private String role;
+
     public UserEntity(){}
 
     private UserEntity(UserEntityBuilder builder){
