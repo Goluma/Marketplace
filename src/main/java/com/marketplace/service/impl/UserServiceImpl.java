@@ -10,6 +10,8 @@ import lombok.extern.java.Log;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,14 +21,14 @@ public class UserServiceImpl implements UserService {
 
     public final UserRepository userRepository;
 
-    //public final PasswordEncoder passwordEncoder;
+    public final PasswordEncoder passwordEncoder;
 
     public final UserMapper userMapper;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper/*, PasswordEncoder passwordEncoder*/){
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
         this.userMapper = userMapper;
-        //this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -38,7 +40,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto registerUser(UserDto userDto) {
         UserEntity userEntity = userMapper.userDtoToUserEntity(userDto);
-        //userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        userEntity.setRoles(new HashSet<>(List.of("ROLE_ADMIN", "ROLE_USER")));
         UserEntity savedUserEntity = userRepository.save(userEntity);
         log.info("Saved new user");
         return userMapper.userEntityToUserDto(savedUserEntity);

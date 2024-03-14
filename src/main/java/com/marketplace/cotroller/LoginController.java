@@ -12,14 +12,14 @@ import java.util.Map;
 @RequestMapping(path = "/login")
 public class LoginController {
 
-//    @GetMapping()
-//    public String showLoginPage(){
-//        return "login";
-//    }
-//
-//    @PostMapping()
-//    public String showMainPage(@RequestParam Map<String,String> allParams){
-//        return "main";
-//    }
+    @GetMapping()
+    public String showLoginPage(){
+        return "login";
+    }
+
+////    @PostMapping()
+////    public String showMainPage(@RequestParam Map<String,String> allParams){
+////        return "main";
+////    }
 
 }
