@@ -1,4 +1,4 @@
-package com.marketplace.cotroller;
+package com.marketplace.service.impl.cotroller;
 
 
 import com.marketplace.domain.dto.UserDto;
@@ -46,11 +46,6 @@ public class RegistrationController {
         }
 
         UserDto savedUserDto =  userService.registerUser(userDto);
-        return new ModelAndView("successRegistration", "user", savedUserDto);
-    }
-
-    @GetMapping(path = "successRegistration")
-    public String showSuccessRegistrationPage(){
-        return "successRegistration";
+        return new ModelAndView("login", "message", "Successful registration!");
     }
 }

@@ -1,11 +1,11 @@
-package com.marketplace.cotroller;
+package com.marketplace.service.impl.cotroller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping(path = "/creation")
-public class ItemCreationController {
 
-    //toDo @PreAuthorize
+@RestController
+@RequestMapping(path = "/search")
+public class SearchController {
+
 }

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Marketplace</title>
+</head>
+<form action="#" th:action = "@{/main}" method="GET" enctype="utf8">
+    <body>
+    <div>
+        <font size = 6> Item manager. </font>
+    </div>
+    </body>
+</form>
+<a th:href="@{/showItems}" text="#{label.form.showItemsLink}">Show yours items</a> <br />
+<a th:href="@{/createItem}" text="#{label.form.createItemLink}">Create item</a> <br />
+<a th:href="@{/updateItem}" text="#{label.form.updateItemLink}">Update item</a> <br />
+<a th:href="@{/deleteItem}" text="#{label.form.deleteItemLink}">Delete item</a> <br /> <br /> <br />
+<a th:href="@{/main}" text="#{label.form.backLink}">Back</a> <br />
+</html>

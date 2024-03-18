@@ -1,6 +1,6 @@
-package com.marketplace.service;
+package com.marketplace.service.impl;
 
-import com.marketplace.domain.MyUserDetails;
+import com.marketplace.domain.UserDetailsImpl;
 import com.marketplace.domain.entity.UserEntity;
 import com.marketplace.repository.UserRepository;
 import lombok.extern.java.Log;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 @Log
-public class MyUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -24,7 +24,7 @@ public class MyUserDetailsService implements UserDetailsService {
         log.info(email);
         Optional<UserEntity> userEntity = userRepository.findByEmailLike(email);
         log.info("I was found" + userEntity.toString());
-        return userEntity.map(MyUserDetails::new)
+        return userEntity.map(UserDetailsImpl::new)
                 .orElseThrow(() -> new UsernameNotFoundException("There is no such user with email: " + email));
     }
 }

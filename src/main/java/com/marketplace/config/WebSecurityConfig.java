@@ -1,6 +1,6 @@
 package com.marketplace.config;
 
-import com.marketplace.service.MyUserDetailsService;
+import com.marketplace.service.impl.UserDetailsServiceImpl;
 import lombok.extern.java.Log;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +27,7 @@ public class WebSecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(){
-        return new MyUserDetailsService();
+        return new UserDetailsServiceImpl();
     }
 
     @Bean

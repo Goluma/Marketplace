@@ -6,12 +6,14 @@
 <form action="#" th:action = "@{/main}" method="GET" enctype="utf8">
     <body>
     <div>
-        Web Application. <span th:text="${message}"></span> <br />
+        Welcome!<br />
     </div>
     </body>
 </form>
 
 <form th:action="@{/logout}" method="post">
+    <a th:href="@{/item}" text="#{label.form.itemLink}">Item manager</a> <br />
+    <a th:href="@{/search}" text="#{label.form.searchItemsLink}">Search items</a> <br />
     <input type="submit" value="Sign Out"/>
 </form>
 </html>

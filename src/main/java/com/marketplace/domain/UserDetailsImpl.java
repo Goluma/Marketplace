@@ -10,11 +10,11 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Log
-public class MyUserDetails implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
     private UserEntity userEntity;
 
-    public MyUserDetails(UserEntity userEntity){
+    public UserDetailsImpl(UserEntity userEntity){
         this.userEntity = userEntity;
     }
 
