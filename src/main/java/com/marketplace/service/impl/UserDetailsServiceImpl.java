@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@Log
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -21,9 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        log.info(email);
         Optional<UserEntity> userEntity = userRepository.findByEmailLike(email);
-        log.info("I was found" + userEntity.toString());
         return userEntity.map(UserDetailsImpl::new)
                 .orElseThrow(() -> new UsernameNotFoundException("There is no such user with email: " + email));
     }

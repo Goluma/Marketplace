@@ -16,7 +16,6 @@ import java.util.Optional;
 
 @Service
 @Transactional
-@Log
 public class UserServiceImpl implements UserService {
 
     public final UserRepository userRepository;
@@ -41,9 +40,8 @@ public class UserServiceImpl implements UserService {
     public UserDto registerUser(UserDto userDto) {
         UserEntity userEntity = userMapper.userDtoToUserEntity(userDto);
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        userEntity.setRoles(new HashSet<>(List.of("ROLE_ADMIN", "ROLE_USER")));
+        userEntity.setRoles(new HashSet<>(List.of(/*"ROLE_ADMIN",*/ "ROLE_USER")));
         UserEntity savedUserEntity = userRepository.save(userEntity);
-        log.info("Saved new user");
         return userMapper.userEntityToUserDto(savedUserEntity);
     }
 }

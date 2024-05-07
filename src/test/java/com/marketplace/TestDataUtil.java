@@ -9,7 +9,7 @@ public final class TestDataUtil {
 
     public static ItemEntity createItemA(){
         return ItemEntity.builder()
-                .setPrice(2000d)
+                .setPrice("2000")
                 .setDescription("Something interesting")
                 .build();
     }
@@ -17,14 +17,14 @@ public final class TestDataUtil {
 
     public static ItemEntity createItemB(){
         return ItemEntity.builder()
-                .setPrice(3000d)
+                .setPrice("3000")
                 .setDescription("Something interesting")
                 .build();
     }
 
     public static ItemEntity createItemC(){
         return ItemEntity.builder()
-                .setPrice(3000d)
+                .setPrice("3000")
                 .setDescription("Something interesting")
                 .build();
     }

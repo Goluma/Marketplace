@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Log
@@ -20,7 +21,6 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        log.info("MyUserDetailsCreated");
         return userEntity.getRoles().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
@@ -32,6 +32,10 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return userEntity.getEmail();
+    }
+
+    public UUID getUserUuid(){
+        return userEntity.getUserUuid();
     }
 
     @Override

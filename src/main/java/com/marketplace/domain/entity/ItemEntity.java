@@ -1,6 +1,8 @@
 package com.marketplace.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -12,6 +14,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @EntityListeners(AuditingEntityListener.class)
+@Setter
 @Entity
 @Table(name = "item_entity")
 public class ItemEntity {
@@ -20,11 +23,15 @@ public class ItemEntity {
     @GeneratedValue
     private UUID itemUuid;
 
-    private Double price;
+    private String name;
 
-    private List<String> listOfImageUrls;
+    private String price;
+
+    private String image;
 
     private String description;
+
+    private UUID userUuid;
 
     @CreatedDate
     @Column(name = "CREATED_AT")
@@ -33,10 +40,6 @@ public class ItemEntity {
     @LastModifiedDate
     @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
-
-    public void setDescription(String str){
-        description = str;
-    }
 
     private ItemEntity(ItemEntityBuilder itemBuilder){
         price = itemBuilder.price;
@@ -54,10 +57,10 @@ public class ItemEntity {
     }
 
     public static final class ItemEntityBuilder{
-        private Double price;
+        private String price;
         private String description;
 
-        public ItemEntityBuilder setPrice(Double price){
+        public ItemEntityBuilder setPrice(String price){
             this.price = price;
             return this;
         }
@@ -79,11 +82,12 @@ public class ItemEntity {
         ItemEntity that = (ItemEntity) o;
         return itemUuid.equals(that.itemUuid)
                 && price.equals(that.price)
-                && description.equals(that.description);
+                && description.equals(that.description)
+                && image.equals(that.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(itemUuid, price, listOfImageUrls, description);
+        return Objects.hash(itemUuid, price, image, description);
     }
 }

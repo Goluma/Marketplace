@@ -1,4 +1,4 @@
-package com.marketplace.service.impl.cotroller;
+package com.marketplace.cotroller;
 
 
 import com.marketplace.domain.dto.UserDto;

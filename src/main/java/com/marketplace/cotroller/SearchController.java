@@ -1,4 +1,4 @@
-package com.marketplace.service.impl.cotroller;
+package com.marketplace.cotroller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

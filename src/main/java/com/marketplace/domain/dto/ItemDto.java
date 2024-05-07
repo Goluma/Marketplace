@@ -1,20 +1,30 @@
 package com.marketplace.domain.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
 import java.util.UUID;
 
-@Getter
 @Setter
+@Getter
 public class ItemDto {
 
     private UUID itemUuid;
 
-    private Double price;
+    @NotEmpty
+    private String name;
 
-    private List<String> listOfImageUrls;
+    @NotEmpty
+    private String price;
 
+    @NotEmpty
+    private byte[] image;
+
+    @NotEmpty
     private String description;
+
+    private UUID userUuid;
+
 }
