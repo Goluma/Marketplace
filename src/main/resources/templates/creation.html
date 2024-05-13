@@ -6,7 +6,7 @@
 <body>
 <h1 text="#{label.form.title}">Item creation</h1> <br />
     <span th:text="${message}"></span> <br />
-<form id = "itemDto" action="/" th:action = "@{/creation}" th:object="${item}" method="POST" enctype="utf8">
+<form id = "itemDto" action="/creation" th:action = "@{/creation}" th:object="${item}" method="POST" enctype="multipart/form-data">
   <div>
     <label text="#{label.user.name}">Name</label>
     <input th:field="*{name}"/>
@@ -37,36 +37,5 @@
  <br /> <br /> <br />
 <a th:href="@{/item}" text="#{label.form.itemLink}">Back</a> <br />
 <a th:href="@{/main}" text="#{label.form.mainLink}"> Main </a>
-<script>
-    $(document).ready(function() {
-        $('#imageInput').on('change', function() {
-            var file = this.files[0];
-            var reader = new FileReader();
-            reader.onloadend = function() {
-                $('#images').val(reader.result);
-            };
-            reader.readAsArrayBuffer(file);
-        });
-
-        $('#itemDto').on('submit', function(e) {
-
-            var formData = new FormData(this);
-
-            $.ajax({
-                type: 'POST',
-                url: '/creation',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-
-                },
-                error: function(error) {
-
-                }
-            });
-        });
-    });
-</script>
 </body>
 </html>

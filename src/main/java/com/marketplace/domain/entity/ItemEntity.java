@@ -27,7 +27,7 @@ public class ItemEntity {
 
     private String price;
 
-    private String image;
+    private String pathToImage;
 
     private String description;
 
@@ -40,6 +40,9 @@ public class ItemEntity {
     @LastModifiedDate
     @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
+
+    @Column(name = "DELETED_AT")
+    private LocalDateTime deletedAt;
 
     private ItemEntity(ItemEntityBuilder itemBuilder){
         price = itemBuilder.price;
@@ -83,11 +86,11 @@ public class ItemEntity {
         return itemUuid.equals(that.itemUuid)
                 && price.equals(that.price)
                 && description.equals(that.description)
-                && image.equals(that.image);
+                && pathToImage.equals(that.pathToImage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(itemUuid, price, image, description);
+        return Objects.hash(itemUuid, price, pathToImage, description);
     }
 }

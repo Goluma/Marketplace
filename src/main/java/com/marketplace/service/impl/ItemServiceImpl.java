@@ -22,9 +22,12 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDto save(ItemDto itemDto, UserDetailsImpl userDetails) {
+        itemDto.setPathToImage(ImageSaving.saveImage(itemDto.getImage()));
+
         ItemEntity itemEntity = itemMapper.itemDtoToItemEntity(itemDto);
         itemEntity.setUserUuid(userDetails.getUserUuid());
         ItemEntity savedEntity = itemRepository.save(itemEntity);
+
         return itemMapper.itemEntityToItemDto(savedEntity);
     }
 }

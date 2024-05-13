@@ -1,6 +1,5 @@
 package com.marketplace.cotroller;
 
-import com.marketplace.config.ImageConverter;
 import com.marketplace.domain.UserDetailsImpl;
 import com.marketplace.domain.dto.ItemDto;
 import com.marketplace.service.ItemService;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.io.IOException;
 
 @Controller
 @Log
@@ -40,13 +37,12 @@ public class ItemController {
     @PostMapping(path = "/creation")
     public ModelAndView saveItem(@ModelAttribute("item") @Valid ItemDto itemDto,
                                  BindingResult bindingResult,
-                                 @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
+                                 @AuthenticationPrincipal UserDetailsImpl userDetails) {
         if (bindingResult.hasErrors()){
             return new ModelAndView("creation", "message", "Error");
         }
-        log.info("Size: " + itemDto.getImage().length + " " + itemDto.getDescription());
-        ImageConverter.byteArrayToImage(itemDto.getImage(), "D:/");
-        //itemService.save(itemDto, userDetails);
+
+        itemService.save(itemDto, userDetails);
         return new ModelAndView("creation", "message", "Item successfully created");
     }
 
