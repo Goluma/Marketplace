@@ -59,7 +59,6 @@ public class UserEntity {
     public static final class UserEntityBuilder{
         private String email;
         private String password;
-
         private String nickName;
 
         public UserEntityBuilder setLogin(String login){

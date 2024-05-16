@@ -1,8 +1,11 @@
 package com.marketplace.service.impl;
 
 import lombok.extern.java.Log;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,11 +13,11 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 @Log
-public final class ImageSaving {
+public final class ImageService {
 
-    private ImageSaving(){}
+    private ImageService(){}
 
-    private static final String PATH_TO_IMAGE = "src/main/resources/static";
+    private static final String PATH_TO_IMAGE = "src/main/resources/static/";
 
     public static String saveImage(MultipartFile file){
 

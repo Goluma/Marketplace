@@ -10,6 +10,10 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Log
 public class ItemServiceImpl implements ItemService {
@@ -22,7 +26,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDto save(ItemDto itemDto, UserDetailsImpl userDetails) {
-        itemDto.setPathToImage(ImageSaving.saveImage(itemDto.getImage()));
+        itemDto.setPathToImage(ImageService.saveImage(itemDto.getImage()));
 
         ItemEntity itemEntity = itemMapper.itemDtoToItemEntity(itemDto);
         itemEntity.setUserUuid(userDetails.getUserUuid());
@@ -30,4 +34,17 @@ public class ItemServiceImpl implements ItemService {
 
         return itemMapper.itemEntityToItemDto(savedEntity);
     }
+
+    @Override
+    public List<ItemDto> getAllUsersItems(UserDetailsImpl userDetails) {
+        List<ItemEntity> itemEntityList = itemRepository.findByUserUuid(userDetails.getUserUuid());
+        List<ItemDto> itemDtoList = itemEntityList.stream().map(x -> {
+            ItemDto itemDto = itemMapper.itemEntityToItemDto(x);
+            File file = new File(itemDto.getPathToImage());
+            itemDto.setPathToImage("/" + file.getName());
+            return itemDto;
+        }).collect(Collectors.toList());
+        return itemDtoList;
+    }
+
 }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @Log
 public class ItemController {
@@ -47,8 +49,10 @@ public class ItemController {
     }
 
     @GetMapping(path = "/show")
-    public ModelAndView showAllItemsPage(){
-        return new ModelAndView("show");
+    public Model showAllUserItemsItemsPage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        List<ItemDto> itemDtoList = itemService.getAllUsersItems(userDetails);
+        model.addAttribute("items", itemDtoList);
+        return model;
     }
 
     @GetMapping(path = "/update")

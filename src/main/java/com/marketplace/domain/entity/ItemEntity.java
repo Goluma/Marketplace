@@ -15,6 +15,7 @@ import java.util.UUID;
 
 @EntityListeners(AuditingEntityListener.class)
 @Setter
+@Getter
 @Entity
 @Table(name = "item_entity")
 public class ItemEntity {
@@ -60,16 +61,29 @@ public class ItemEntity {
     }
 
     public static final class ItemEntityBuilder{
+
+        private String name;
         private String price;
         private String description;
+        private String pathToImage;
 
         public ItemEntityBuilder setPrice(String price){
             this.price = price;
             return this;
         }
 
+        public ItemEntityBuilder setPathToImage(String pathToImage){
+            this.pathToImage = pathToImage;
+            return this;
+        }
+
         public ItemEntityBuilder setDescription(String description){
             this.description = description;
+            return this;
+        }
+
+        public ItemEntityBuilder setName(String name){
+            this.name = name;
             return this;
         }
 
@@ -93,4 +107,16 @@ public class ItemEntity {
     public int hashCode() {
         return Objects.hash(itemUuid, price, pathToImage, description);
     }
+
+
+    @Override
+    public String toString() {
+        return "ItemEntityBuilder{" +
+                "name='" + name + '\'' +
+                ", price='" + price + '\'' +
+                ", description='" + description + '\'' +
+                ", pathToImage='" + pathToImage + '\'' +
+                '}';
+    }
+
 }

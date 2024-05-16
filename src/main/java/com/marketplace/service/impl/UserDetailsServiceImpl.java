@@ -3,7 +3,6 @@ package com.marketplace.service.impl;
 import com.marketplace.domain.UserDetailsImpl;
 import com.marketplace.domain.entity.UserEntity;
 import com.marketplace.repository.UserRepository;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
