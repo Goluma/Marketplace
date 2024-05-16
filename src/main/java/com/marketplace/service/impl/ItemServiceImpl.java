@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,6 +46,11 @@ public class ItemServiceImpl implements ItemService {
             return itemDto;
         }).collect(Collectors.toList());
         return itemDtoList;
+    }
+
+    @Override
+    public void deleteItem(List<UUID> selectedItems) {
+        itemRepository.deleteAllById(selectedItems);
     }
 
 }

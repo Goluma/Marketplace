@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>User's items</title>
+    <title>Your items</title>
 </head>
 <body>
 <table>
@@ -19,9 +19,11 @@
         <td th:text="${item.description}"></td>
         <td th:text="${item.price}"></td>
         <td><img th:src="@{${item.pathToImage}}" width="100" height="100"></td>
-
     </tr>
     </tbody>
 </table>
+<br /> <br />
+<a th:href="@{/item}" text="#{label.form.itemLink}">Back</a> <br />
+<a th:href="@{/main}" text="#{label.form.mainLink}"> Main </a>
 </body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Your items</title>
+</head>
+<body>
+<h1>Items</h1>
+<form action="/delete" th:action = "@{/delete}" th:object="${items}" method="post" enctype="multipart/form-data">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Select</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item, iterStat : ${items}">
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.description}"></td>
+            <td th:text="${item.price}"></td>
+            <td><img th:src="@{${item.pathToImage}}" width="100" height="100"></td>
+            <td><input type="checkbox" name="selectedItems" th:value="${item.itemUuid}" /></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <input type="submit" value="Select">
+</form>
+<br /> <br />
+<a th:href="@{/item}" text="#{label.form.itemLink}">Back</a> <br />
+<a th:href="@{/main}" text="#{label.form.mainLink}"> Main </a>
+</body>
+</html>

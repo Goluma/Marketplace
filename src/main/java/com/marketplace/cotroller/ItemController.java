@@ -13,9 +13,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @Log
@@ -58,6 +60,20 @@ public class ItemController {
     @GetMapping(path = "/update")
     public ModelAndView showUpdatePage(){
         return new ModelAndView("update");
+    }
+
+    @GetMapping(path = "/delete")
+    public Model showDeletePage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        List<ItemDto> itemDtoList = itemService.getAllUsersItems(userDetails);
+        model.addAttribute("items", itemDtoList);
+        return model;
+    }
+
+    @PostMapping(path = "/delete")
+    public String deleteItem(@AuthenticationPrincipal UserDetailsImpl userDetails,
+                             @RequestParam("selectedItems") List<UUID> selectedItems){
+        itemService.deleteItem(selectedItems);
+        return "redirect:/delete";
     }
 
 }
