@@ -13,4 +13,8 @@ public interface ItemService {
     List<ItemDto> getAllUsersItems(UserDetailsImpl userDetails);
 
     void deleteItem(List<UUID> selectedItems);
+
+    void setUpdatedItemUuid(UUID oldItemDto);
+
+    void updateItem(ItemDto itemDto);
 }

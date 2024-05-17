@@ -58,8 +58,33 @@ public class ItemController {
     }
 
     @GetMapping(path = "/update")
-    public ModelAndView showUpdatePage(){
-        return new ModelAndView("update");
+    public Model showUpdatePage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        List<ItemDto> itemDtoList = itemService.getAllUsersItems(userDetails);
+        model.addAttribute("items", itemDtoList);
+        return model;
+    }
+
+    @PostMapping(path = "/update")
+    public String updateItem(@ModelAttribute("selectedItem") UUID oldItemDto,
+                             @AuthenticationPrincipal UserDetailsImpl userDetails){
+        itemService.setUpdatedItemUuid(oldItemDto);
+        return "redirect:/updateNew";
+    }
+
+    @GetMapping(path = "/updateNew")
+    public Model updatedItemCreationPage(Model model){
+        model.addAttribute("item", new ItemDto());
+        return model;
+    }
+
+    @PostMapping(path = "/updateNew")
+    public ModelAndView updatedItemCreation(@ModelAttribute("item") @Valid ItemDto itemDto,
+                                      BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return new ModelAndView("updateNew", "message", "Error");
+        }
+        itemService.updateItem(itemDto);
+        return new ModelAndView("redirect:/update");
     }
 
     @GetMapping(path = "/delete")
@@ -70,10 +95,10 @@ public class ItemController {
     }
 
     @PostMapping(path = "/delete")
-    public String deleteItem(@AuthenticationPrincipal UserDetailsImpl userDetails,
-                             @RequestParam("selectedItems") List<UUID> selectedItems){
+    public String deleteItem(@RequestParam("selectedItems") List<UUID> selectedItems){
         itemService.deleteItem(selectedItems);
         return "redirect:/delete";
     }
 
 }
+

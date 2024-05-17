@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemMapper itemMapper;
+
+    private UUID itemUpdatedUuid;
 
     @Override
     public ItemDto save(ItemDto itemDto, UserDetailsImpl userDetails) {
@@ -38,7 +42,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDto> getAllUsersItems(UserDetailsImpl userDetails) {
-        List<ItemEntity> itemEntityList = itemRepository.findByUserUuid(userDetails.getUserUuid());
+        List<ItemEntity> itemEntityList = itemRepository.findAllByUserUuid(userDetails.getUserUuid());
         List<ItemDto> itemDtoList = itemEntityList.stream().map(x -> {
             ItemDto itemDto = itemMapper.itemEntityToItemDto(x);
             File file = new File(itemDto.getPathToImage());
@@ -50,7 +54,25 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void deleteItem(List<UUID> selectedItems) {
-        itemRepository.deleteAllById(selectedItems);
+        for (UUID uuid : selectedItems){
+            itemRepository.deleteItemFromSelectByUuid(uuid, LocalDateTime.now());
+        }
     }
 
+    @Override
+    public void setUpdatedItemUuid(UUID oldItemDtoUuid) {
+        this.itemUpdatedUuid = oldItemDtoUuid;
+    }
+
+    @Override
+    public void updateItem(ItemDto itemDto) {
+        itemRepository.findById(itemUpdatedUuid).map(updatedItemEntity -> {
+            updatedItemEntity.setName(itemDto.getName());
+            updatedItemEntity.setDescription(itemDto.getDescription());
+            updatedItemEntity.setPrice(itemDto.getPrice());
+            updatedItemEntity.setPathToImage(ImageService.saveImage(itemDto.getImage()));
+            return itemRepository.save(updatedItemEntity);
+        }).orElseThrow(() -> new RuntimeException("Doesn't exist"));
+
+    }
 }

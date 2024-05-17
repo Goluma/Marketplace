@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1 text="#{label.form.title}">Updated item creation</h1> <br />
+<span th:text="${message}"></span> <br />
+<form id = "itemDto" action="/updateNew" th:action = "@{/updateNew}" th:object="${item}" method="POST" enctype="multipart/form-data">
+  <div>
+    <label text="#{label.user.name}">Name</label>
+    <input th:field="*{name}"/>
+    <p th:if="${#fields.hasErrors('name')}" th:class="${#fields.hasErrors('name')}? error"> Name can't be null </p>
+  </div>
+  <div>
+    <label text="#{label.user.description}">Description</label>
+    <input th:field="*{description}"/>
+    <p th:if="${#fields.hasErrors('description')}" th:class="${#fields.hasErrors('description')}? error"> Description can't be null </p>
+  </div>
+  <div>
+    <label text="#{label.user.price}">Price</label>
+    <input type="text" th:field="*{price}"/>
+    <p th:if="${#fields.hasErrors('price')}" th:class="${#fields.hasErrors('price')}? error"> Price can't be null </p>
+  </div>
+  <div>
+    <label text="#{label.user.image}">Image</label>
+    <input type="file" id="imageInput" accept = "image/*" th:field="*{image}"/>
+    <p th:if="${#fields.hasErrors('image')}" th:class="${#fields.hasErrors('image')}? error"> Image can't be null </p>
+  </div>
+  <style>
+    .error {
+        color: red;
+    }
+    </style>
+  <button type="submit" text="#{label.form.submit}">Submit</button>
+</form>
+</body>
+</html>

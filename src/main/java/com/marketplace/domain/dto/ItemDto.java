@@ -28,4 +28,17 @@ public class ItemDto {
     private UUID userUuid;
 
     private MultipartFile image;
+
+    @Override
+    public String toString() {
+        return "ItemDto{" +
+                "itemUuid=" + itemUuid +
+                ", name='" + name + '\'' +
+                ", price='" + price + '\'' +
+                ", pathToImage='" + pathToImage + '\'' +
+                ", description='" + description + '\'' +
+                ", userUuid=" + userUuid +
+                ", image=" + image +
+                '}';
+    }
 }
