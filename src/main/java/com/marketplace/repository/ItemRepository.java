@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface ItemRepository extends JpaRepository<ItemEntity, UUID> {
@@ -22,5 +21,9 @@ public interface ItemRepository extends JpaRepository<ItemEntity, UUID> {
     @Transactional
     @Query(nativeQuery = true, value = "update item_entity set deleted_at = :deleted_at where item_uuid = :item_uuid")
     void deleteItemFromSelectByUuid(@Param("item_uuid") UUID item_uuid, @Param("deleted_at")LocalDateTime now);
+
+    @Query(nativeQuery = true, value = "select * from item_entity where name like :name")
+    List<ItemEntity> findByName(@Param("name")String name);
+
 
 }

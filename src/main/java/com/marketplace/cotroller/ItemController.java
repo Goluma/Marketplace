@@ -87,6 +87,22 @@ public class ItemController {
         return new ModelAndView("redirect:/update");
     }
 
+    @GetMapping(path = "/search")
+    public String searchPage(Model model){
+        ItemDto itemDto = new ItemDto();
+        model.addAttribute("item", itemDto);
+        return "search";
+    }
+
+    @PostMapping(path = "/search")
+    public ModelAndView searching(@ModelAttribute("item") ItemDto searchRequest){
+        List<ItemDto> resultList = itemService.getAllItemsByRequest(searchRequest.getName());
+        if (resultList.size() == 0){
+            return new ModelAndView("search", "message", "No such items");
+        }
+        return new ModelAndView("searchResults", "items", resultList);
+    }
+
     @GetMapping(path = "/delete")
     public Model showDeletePage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
         List<ItemDto> itemDtoList = itemService.getAllUsersItems(userDetails);

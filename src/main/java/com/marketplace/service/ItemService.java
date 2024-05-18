@@ -17,4 +17,6 @@ public interface ItemService {
     void setUpdatedItemUuid(UUID oldItemDto);
 
     void updateItem(ItemDto itemDto);
+
+    List<ItemDto> getAllItemsByRequest(String searchRequest);
 }

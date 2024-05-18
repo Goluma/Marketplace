@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1 text="#{label.form.title}">Items searching</h1>
+<form id = "itemDto" action="/search" th:action = "@{/search}" th:object="${item}" method="POST" enctype="multipart/form-data">
+    <div>
+        <label text="#{label.user.name}"></label>
+        <input th:field="*{name}"/>
+    </div>
+    <button type="submit" text="#{label.form.submit}">Search</button>
+</form>
+<span th:text="${message}"></span> <br />
+<br /> <br />
+<a th:href="@{/main}" text="#{label.form.itemLink}">Back</a> <br />
+</body>
+</html>

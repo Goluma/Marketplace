@@ -43,12 +43,9 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDto> getAllUsersItems(UserDetailsImpl userDetails) {
         List<ItemEntity> itemEntityList = itemRepository.findAllByUserUuid(userDetails.getUserUuid());
-        List<ItemDto> itemDtoList = itemEntityList.stream().map(x -> {
-            ItemDto itemDto = itemMapper.itemEntityToItemDto(x);
-            File file = new File(itemDto.getPathToImage());
-            itemDto.setPathToImage("/" + file.getName());
-            return itemDto;
-        }).collect(Collectors.toList());
+        List<ItemDto> itemDtoList = itemEntityList.stream()
+                .map(this::convertItemEntityToItemDto)
+                .collect(Collectors.toList());
         return itemDtoList;
     }
 
@@ -74,5 +71,20 @@ public class ItemServiceImpl implements ItemService {
             return itemRepository.save(updatedItemEntity);
         }).orElseThrow(() -> new RuntimeException("Doesn't exist"));
 
+    }
+
+    @Override
+    public List<ItemDto> getAllItemsByRequest(String searchRequest) {
+        List<ItemDto> itemDtoList = itemRepository.findByName("%" + searchRequest + "%").stream()
+                .map(this::convertItemEntityToItemDto)
+                .collect(Collectors.toList());
+        return itemDtoList;
+    }
+
+    private ItemDto convertItemEntityToItemDto(ItemEntity itemEntity){
+        ItemDto itemDto = itemMapper.itemEntityToItemDto(itemEntity);
+        File file = new File(itemDto.getPathToImage());
+        itemDto.setPathToImage("/" + file.getName());
+        return itemDto;
     }
 }
