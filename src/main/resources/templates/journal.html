@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1 text="#{label.form.title}">Journal</h1>
+<span th:text="${message}"></span> <br />
+<form id = "journalDto" action="/journal" th:action = "@{/journal}" th:object="${journal}" method="POST" enctype="multipart/form-data">
+    <div>
+        <label text="#{label.user.tableName}"></label>
+        <input th:field="*{tableName}"/>
+    </div>
+    <button type="submit" text="#{label.form.submit}">Enter</button>
+</form>
+<br /> <br />
+<a th:href="@{/admin}" text="#{label.form.adminLink}">Back</a> <br />
+<a th:href="@{/main}" text="#{label.form.mainLink}">Main</a> <br />
+</body>
+</html>

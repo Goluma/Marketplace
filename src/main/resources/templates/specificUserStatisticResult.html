@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<a th:href="@{/specificUserStatistic}" text="#{label.form.itemLink}">Back</a> <br />
+<a th:href="@{/admin}" text="#{label.form.mainLink}"> Admin page </a>
+<h1>User statistic</h1>
+<table>
+    <thead>
+    <tr>
+        <th>User UUID</th>
+        <th>Query name</th>
+        <th>Table name</th>
+        <th>DataTime</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.userUuid}"></td>
+        <td th:text="${user.queryName}"></td>
+        <td th:text="${user.tableName}"></td>
+        <td th:text="${user.dateTime}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

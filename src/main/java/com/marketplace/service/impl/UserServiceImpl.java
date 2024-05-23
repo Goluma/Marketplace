@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -43,5 +44,10 @@ public class UserServiceImpl implements UserService {
         userEntity.setRoles(new HashSet<>(List.of(/*"ROLE_ADMIN",*/ "ROLE_USER")));
         UserEntity savedUserEntity = userRepository.save(userEntity);
         return userMapper.userEntityToUserDto(savedUserEntity);
+    }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream().map(userMapper::userEntityToUserDto).collect(Collectors.toList());
     }
 }

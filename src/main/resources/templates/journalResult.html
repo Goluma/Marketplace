@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>Statistic</title>
+</head>
+<body>
+<table>
+  <thead>
+  <tr>
+    <th>User UUID</th>
+    <th>Query name</th>
+    <th>Table name</th>
+    <th>DataTime</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="stat : ${journal}">
+    <td th:text="${stat.userUuid}"></td>
+    <td th:text="${stat.queryName}"></td>
+    <td th:text="${stat.tableName}"></td>
+    <td th:text="${stat.dateTime}"></td>
+  </tr>
+  </tbody>
+  <br />
+</table>
+<br /> <br />
+<a th:href="@{/journal}" text="#{label.form.adminLink}">Back</a> <br />
+<a th:href="@{/main}" text="#{label.form.mainLink}"> Main </a>
+</body>
+</html>

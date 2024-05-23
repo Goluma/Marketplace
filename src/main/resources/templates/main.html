@@ -3,6 +3,7 @@
 <head>
     <title>Marketplace</title>
 </head>
+<span th:text="${message}"></span> <br />
 <form action="#" th:action = "@{/main}" method="GET" enctype="utf8">
     <body>
     <div>
@@ -14,6 +15,7 @@
 <form th:action="@{/logout}" method="post">
     <a th:href="@{/item}" text="#{label.form.itemLink}">Item manager</a> <br />
     <a th:href="@{/search}" text="#{label.form.searchItemsLink}">Search items</a> <br />
+    <a th:href="@{/admin}" text="#{label.form.adminItemsLink}">Only for admins</a> <br />
     <input type="submit" value="Sign Out"/>
 </form>
 </html>

@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Marketplace</title>
+</head>
+<span th:text="${message}"></span> <br />
+    <a th:href="@{/journal}" text="#{label.form.statistic}">Journal</a> <br />
+    <a th:href="@{/specificUserStatistic}" text="#{label.form.specificUserStatistic}">Statistic about specific user</a>  <br />
+    <a th:href="@{/allUsers}" text="#{label.form.allUsers}">List of users</a> <br /> <br />
+    <a th:href="@{/main}" text="#{label.form.backLink}">Back</a> <br />
+</html>

@@ -67,7 +67,7 @@ public class ItemController {
     @PostMapping(path = "/update")
     public String updateItem(@ModelAttribute("selectedItem") UUID oldItemDto,
                              @AuthenticationPrincipal UserDetailsImpl userDetails){
-        itemService.setUpdatedItemUuid(oldItemDto);
+        itemService.setUpdatedItemUuid(oldItemDto, userDetails);
         return "redirect:/updateNew";
     }
 
@@ -79,28 +79,13 @@ public class ItemController {
 
     @PostMapping(path = "/updateNew")
     public ModelAndView updatedItemCreation(@ModelAttribute("item") @Valid ItemDto itemDto,
-                                      BindingResult bindingResult){
+                                      BindingResult bindingResult,
+                                            @AuthenticationPrincipal UserDetailsImpl userDetails){
         if (bindingResult.hasErrors()){
             return new ModelAndView("updateNew", "message", "Error");
         }
-        itemService.updateItem(itemDto);
+        itemService.updateItem(itemDto, userDetails);
         return new ModelAndView("redirect:/update");
-    }
-
-    @GetMapping(path = "/search")
-    public String searchPage(Model model){
-        ItemDto itemDto = new ItemDto();
-        model.addAttribute("item", itemDto);
-        return "search";
-    }
-
-    @PostMapping(path = "/search")
-    public ModelAndView searching(@ModelAttribute("item") ItemDto searchRequest){
-        List<ItemDto> resultList = itemService.getAllItemsByRequest(searchRequest.getName());
-        if (resultList.size() == 0){
-            return new ModelAndView("search", "message", "No such items");
-        }
-        return new ModelAndView("searchResults", "items", resultList);
     }
 
     @GetMapping(path = "/delete")
@@ -111,8 +96,9 @@ public class ItemController {
     }
 
     @PostMapping(path = "/delete")
-    public String deleteItem(@RequestParam("selectedItems") List<UUID> selectedItems){
-        itemService.deleteItem(selectedItems);
+    public String deleteItem(@RequestParam("selectedItems") List<UUID> selectedItems,
+                             @AuthenticationPrincipal UserDetailsImpl userDetails){
+        itemService.deleteItem(selectedItems, userDetails);
         return "redirect:/delete";
     }
 

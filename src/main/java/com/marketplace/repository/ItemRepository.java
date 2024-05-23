@@ -22,7 +22,7 @@ public interface ItemRepository extends JpaRepository<ItemEntity, UUID> {
     @Query(nativeQuery = true, value = "update item_entity set deleted_at = :deleted_at where item_uuid = :item_uuid")
     void deleteItemFromSelectByUuid(@Param("item_uuid") UUID item_uuid, @Param("deleted_at")LocalDateTime now);
 
-    @Query(nativeQuery = true, value = "select * from item_entity where name like :name")
+    @Query(nativeQuery = true, value = "select * from item_entity where name like :name and deleted_at is null")
     List<ItemEntity> findByName(@Param("name")String name);
 
 

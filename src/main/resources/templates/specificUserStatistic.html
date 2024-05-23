@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1 text="#{label.form.title}">Items searching</h1>
+<form id = "itemDto" action="/specificUserStatistic" th:action = "@{/specificUserStatistic}" th:object="${user}" method="POST" enctype="multipart/form-data">
+    <div>
+        <label text="#{label.user.userUuid}"></label>
+        <input th:field="*{userUuid}"/>
+    </div>
+    <button type="submit" text="#{label.form.submit}">Enter</button>
+</form>
+<span th:text="${message}"></span> <br />
+<br /> <br />
+<a th:href="@{/allUsers}" text="#{label.form.allUsers}">List of users</a> <br />
+<a th:href="@{/admin}" text="#{label.form.adminLink}">Back</a> <br />
+<a th:href="@{/main}" text="#{label.form.mainLink}"> Main </a>
+</body>
+</html>

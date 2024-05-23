@@ -2,7 +2,6 @@ package com.marketplace.service;
 
 import com.marketplace.domain.UserDetailsImpl;
 import com.marketplace.domain.dto.ItemDto;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,11 +11,11 @@ public interface ItemService {
 
     List<ItemDto> getAllUsersItems(UserDetailsImpl userDetails);
 
-    void deleteItem(List<UUID> selectedItems);
+    void deleteItem(List<UUID> selectedItems, UserDetailsImpl userDetails);
 
-    void setUpdatedItemUuid(UUID oldItemDto);
+    void setUpdatedItemUuid(UUID oldItemDto, UserDetailsImpl userDetails);
 
-    void updateItem(ItemDto itemDto);
+    void updateItem(ItemDto itemDto, UserDetailsImpl userDetails);
 
-    List<ItemDto> getAllItemsByRequest(String searchRequest);
+    List<ItemDto> getAllItemsByRequest(String searchRequest, UserDetailsImpl userDetails);
 }
