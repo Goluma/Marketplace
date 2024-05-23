@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1 text="#{label.form.title}">Items searching</h1>
+<span  style="color: red;"  th:text="${messages}"></span> <br />
 <form id = "itemDto" action="/search" th:action = "@{/search}" th:object="${item}" method="POST" enctype="multipart/form-data">
     <div>
         <label text="#{label.user.name}"></label>

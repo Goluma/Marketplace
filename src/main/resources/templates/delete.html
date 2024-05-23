@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1>Items</h1>
+<span  style="color: red;"  th:text="${messages}"></span> <br />
 <form action="/delete" th:action = "@{/delete}" th:object="${items}" method="post" enctype="multipart/form-data">
     <table>
         <thead>

@@ -3,6 +3,7 @@ package com.marketplace.cotroller;
 import com.marketplace.domain.UserDetailsImpl;
 import com.marketplace.domain.dto.ItemDto;
 import com.marketplace.service.ItemService;
+import com.marketplace.service.impl.RequestLimiterService;
 import jakarta.validation.Valid;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private RequestLimiterService requestLimiterService;
+
     @GetMapping(path = "/item")
     public String showItemPage(){
         return "item";
@@ -46,22 +50,36 @@ public class ItemController {
             return new ModelAndView("creation", "message", "Error");
         }
 
+        if (!requestLimiterService.addNewRequest(userDetails)){
+            return new ModelAndView("creation",
+                    "message",
+                    String.format("Need %d seconds to wait. Too much requests", requestLimiterService.secondsToWait(userDetails.getUsername())));
+        }
+
         itemService.save(itemDto, userDetails);
         return new ModelAndView("creation", "message", "Item successfully created");
     }
 
     @GetMapping(path = "/show")
-    public Model showAllUserItemsItemsPage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ModelAndView showAllUserItemsItemsPage(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        if (!requestLimiterService.addNewRequest(userDetails)){
+            String str = String.format("Need %d seconds to wait. Too much requests", requestLimiterService.secondsToWait(userDetails.getUsername()));
+            return new ModelAndView("show",
+                    "message", str);
+        }
         List<ItemDto> itemDtoList = itemService.getAllUsersItems(userDetails);
-        model.addAttribute("items", itemDtoList);
-        return model;
+        return new ModelAndView("show", "items", itemDtoList);
     }
 
     @GetMapping(path = "/update")
-    public Model showUpdatePage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ModelAndView showUpdatePage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        if (!requestLimiterService.addNewRequest(userDetails)){
+            String str = String.format("Need %d seconds to wait. Too much requests", requestLimiterService.secondsToWait(userDetails.getUsername()));
+            return new ModelAndView("update",
+                    "messages", str);
+        }
         List<ItemDto> itemDtoList = itemService.getAllUsersItems(userDetails);
-        model.addAttribute("items", itemDtoList);
-        return model;
+        return new ModelAndView("update", "items", itemDtoList);
     }
 
     @PostMapping(path = "/update")
@@ -84,22 +102,37 @@ public class ItemController {
         if (bindingResult.hasErrors()){
             return new ModelAndView("updateNew", "message", "Error");
         }
+
+        if (!requestLimiterService.addNewRequest(userDetails)){
+            String str = String.format("Need %d seconds to wait. Too much requests", requestLimiterService.secondsToWait(userDetails.getUsername()));
+            return new ModelAndView("updateNew",
+                    "messages", str);
+        }
         itemService.updateItem(itemDto, userDetails);
         return new ModelAndView("redirect:/update");
     }
 
     @GetMapping(path = "/delete")
-    public Model showDeletePage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ModelAndView showDeletePage(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        if (!requestLimiterService.addNewRequest(userDetails)){
+            String str = String.format("Need %d seconds to wait. Too much requests", requestLimiterService.secondsToWait(userDetails.getUsername()));
+            return new ModelAndView("delete",
+                    "messages", str);
+        }
         List<ItemDto> itemDtoList = itemService.getAllUsersItems(userDetails);
-        model.addAttribute("items", itemDtoList);
-        return model;
+        return new ModelAndView("delete", "items", itemDtoList);
     }
 
     @PostMapping(path = "/delete")
-    public String deleteItem(@RequestParam("selectedItems") List<UUID> selectedItems,
+    public ModelAndView deleteItem(@RequestParam("selectedItems") List<UUID> selectedItems,
                              @AuthenticationPrincipal UserDetailsImpl userDetails){
+        if (!requestLimiterService.addNewRequest(userDetails)){
+            String str = String.format("Need %d seconds to wait. Too much requests", requestLimiterService.secondsToWait(userDetails.getUsername()));
+            return new ModelAndView("delete",
+                    "messages", str);
+        }
         itemService.deleteItem(selectedItems, userDetails);
-        return "redirect:/delete";
+        return new ModelAndView("redirect:/delete");
     }
 
 }

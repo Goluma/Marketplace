@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1>Choose item to update</h1>
+<span  style="color: red;"  th:text="${messages}"></span> <br />
 <span th:text="${message}"></span> <br />
 <form id="oldItemDto" action="/update" th:action = "@{/update}" th:object="${items}" method="post" enctype="multipart/form-data">
     <table>

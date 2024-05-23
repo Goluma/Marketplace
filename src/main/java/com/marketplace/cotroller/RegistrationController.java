@@ -3,6 +3,7 @@ package com.marketplace.cotroller;
 
 import com.marketplace.domain.dto.UserDto;
 import com.marketplace.service.UserService;
+import com.marketplace.service.impl.RequestLimiterService;
 import jakarta.validation.Valid;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(path = "/registration")
 public class RegistrationController {
 
-    public final UserService userService;
+    private final UserService userService;
 
     public RegistrationController(UserService userService){
         this.userService = userService;
@@ -44,7 +45,6 @@ public class RegistrationController {
                     "message",
                     "An account for " + userDto.getEmail() + " already exists.");
         }
-
         UserDto savedUserDto =  userService.registerUser(userDto);
         return new ModelAndView("login", "message", "Successful registration!");
     }

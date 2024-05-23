@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1 text="#{label.form.title}">Item creation</h1> <br />
+<span  style="color: red;"  th:text="${messages}"></span> <br />
     <span th:text="${message}"></span> <br />
 <form id = "itemDto" action="/creation" th:action = "@{/creation}" th:object="${item}" method="POST" enctype="multipart/form-data">
   <div>

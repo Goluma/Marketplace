@@ -4,7 +4,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<h1 text="#{label.form.title}">Journal</h1>
+<h1 text="#{label.form.title}">Journal: enter count of records you to see</h1>
 <span th:text="${message}"></span> <br />
 <form id = "journalDto" action="/journal" th:action = "@{/journal}" th:object="${journal}" method="POST" enctype="multipart/form-data">
     <div>
